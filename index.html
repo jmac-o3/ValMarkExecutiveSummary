@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valmark Chevrolet | 2025 Annual Performance Review</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+            background: #f5f5f5;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        /* Header */
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 60px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #FF5722;
+        }
+
+        .company-name {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header h1 {
+            font-size: 52px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .header .subtitle {
+            font-size: 24px;
+            color: #FF5722;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Executive Summary */
+        .executive-summary {
+            background: #FF5722;
+            color: white;
+            padding: 50px 60px;
+        }
+
+        .executive-summary h2 {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .executive-summary .section-subtitle {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            opacity: 0.95;
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 5px solid white;
+        }
+
+        .metric-card .metric-value {
+            font-size: 48px;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .metric-card .metric-label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .metric-card .metric-change {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px;
+        }
+
+        .section.dark {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .section.light {
+            background: white;
+        }
+
+        .section.gray {
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            font-size: 42px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            color: #2c3e50;
+        }
+
+        .section.dark h2 {
+            color: white;
+        }
+
+        .section .section-subtitle {
+            color: #FF5722;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .section h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 35px 0 20px 0;
+            color: #2c3e50;
+        }
+
+        .section.dark h3 {
+            color: white;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 30px 0;
+            border-top: 6px solid #FF5722;
+        }
+
+        .section.dark .chart-container {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table thead {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .data-table th {
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .data-table tbody tr {
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .data-table tbody tr.highlight {
+            background: #fff3e0;
+            font-weight: 700;
+        }
+
+        .data-table td {
+            padding: 16px 15px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .data-table td strong {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        /* Insight Cards */
+        .insight-card {
+            background: white;
+            padding: 35px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 6px solid #FF5722;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section.dark .insight-card {
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+
+        .insight-card h4 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .section.dark .insight-card h4 {
+            color: white;
+        }
+
+        .insight-card p {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .section.dark .insight-card p {
+            color: rgba(255,255,255,0.95);
+        }
+
+        .insight-card ul {
+            margin: 15px 0 0 25px;
+        }
+
+        .insight-card li {
+            margin: 10px 0;
+            color: #444;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .section.dark .insight-card li {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .insight-card li strong {
+            color: #2c3e50;
+        }
+
+        .section.dark .insight-card li strong {
+            color: #FF5722;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 60px;
+            text-align: center;
+        }
+
+        .footer p {
+            opacity: 0.9;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .footer .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .footer .logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        .footer .company-name {
+            font-size: 20px;
+        }
+
+        @media print {
+            .chart-wrapper {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">C</div>
+                <div class="company-name">CAJAS DIGITAL</div>
+            </div>
+            <h1>VALMARK CHEVROLET</h1>
+            <div class="subtitle">2025 Annual Performance Review</div>
+            <p style="font-size: 18px; margin-top: 15px;">Comprehensive Year-End Analysis | January - October 2025</p>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Report Generated: October 31, 2025</p>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="executive-summary">
+            <h2>Executive Performance Overview</h2>
+            <div class="section-subtitle">2025 Key Performance Metrics</div>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <span class="metric-value">$740,839</span>
+                    <div class="metric-label">Total Marketing Budget</div>
+                    <div class="metric-change">Strategic investment across all channels</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">90,033</span>
+                    <div class="metric-label">Total Clicks Generated</div>
+                    <div class="metric-change">Strong engagement performance</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">50,919</span>
+                    <div class="metric-label">Total Conversions</div>
+                    <div class="metric-change">Effective lead generation</div>
+                </div>
+                <div class="metric-card">
+                    <span class="metric-value">993</span>
+                    <div class="metric-label">Total Vehicle Sales</div>
+                    <div class="metric-change">Units sold through September</div>
+                </div>
+            </div>
+
+            <p style="font-size: 18px; line-height: 1.8; margin-top: 30px;">Through the first ten months of 2025, Valmark Chevrolet invested $740,839 in comprehensive marketing initiatives, generating 50,919 conversions and delivering 993 units (592 new, 401 used). Digital campaigns demonstrated improved efficiency with strong Performance Max results and diversified traffic sources contributing to overall performance.</p>
+        </div>
+
+        <!-- Quarterly Performance Chart -->
+        <div class="section light">
+            <h2>2025 Performance by Quarter</h2>
+            <div class="section-subtitle">Quarterly Performance Breakdown</div>
+            
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="quarterlyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="insight-card">
+                <h4>Quarterly Trends</h4>
+                <p>Q1 and Q2 demonstrated consistent performance with 354 and 360 units respectively, averaging 118-120 units per month. Q3 showed a 22.5% decline to 279 units (93 units/month average), indicating opportunities for enhanced summer marketing strategies and inventory management.</p>
+            </div>
+        </div>
+
+        <!-- Monthly Sales Performance -->
+        <div class="section gray">
+            <h2>2025 Monthly Sales Performance</h2>
+            <div class="section-subtitle">Vehicle Sales by Month</div>
+            
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="monthlySalesChart"></canvas>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Total Sales</th>
+                        <th>New Vehicles</th>
+                        <th>Used Vehicles</th>
+                        <th>New %</th>
+                        <th>Used %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>January</strong></td>
+                        <td>100</td>
+                        <td>63</td>
+                        <td>37</td>
+                        <td>63%</td>
+                        <td>37%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>February</strong></td>
+                        <td>116</td>
+                        <td>70</td>
+                        <td>46</td>
+                        <td>60%</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td><strong>March</strong></td>
+                        <td>138</td>
+                        <td>74</td>
+                        <td>64</td>
+                        <td>54%</td>
+                        <td>46%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>April</strong></td>
+                        <td>137</td>
+                        <td>77</td>
+                        <td>60</td>
+                        <td>56%</td>
+                        <td>44%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>May</strong></td>
+                        <td>126</td>
+                        <td>73</td>
+                        <td>53</td>
+                        <td>58%</td>
+                        <td>42%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>June</strong></td>
+                        <td>97</td>
+                        <td>58</td>
+                        <td>39</td>
+                        <td>60%</td>
+                        <td>40%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>July</strong></td>
+                        <td>92</td>
+                        <td>60</td>
+                        <td>32</td>
+                        <td>65%</td>
+                        <td>35%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>August</strong></td>
+                        <td>106</td>
+                        <td>65</td>
+                        <td>41</td>
+                        <td>61%</td>
+                        <td>39%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>September</strong></td>
+                        <td>81</td>
+                        <td>52</td>
+                        <td>29</td>
+                        <td>64%</td>
+                        <td>36%</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td><strong>YTD Total</strong></td>
+                        <td><strong>993</strong></td>
+                        <td><strong>592</strong></td>
+                        <td><strong>401</strong></td>
+                        <td><strong>60%</strong></td>
+                        <td><strong>40%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Marketing Budget & Sales Performance -->
+        <div class="section dark">
+            <h2>Marketing Investment & Sales Performance</h2>
+            <div class="section-subtitle">Monthly Budget Allocation & Vehicle Sales</div>
+            
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="budgetSalesChart"></canvas>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Total Budget</th>
+                        <th>New Car Budget</th>
+                        <th>Used Car Budget</th>
+                        <th>Units Sold</th>
+                        <th>Cost Per Unit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>January</strong></td>
+                        <td>$76,167</td>
+                        <td>$55,232</td>
+                        <td>$20,935</td>
+                        <td>100</td>
+                        <td>$762</td>
+                    </tr>
+                    <tr>
+                        <td><strong>February</strong></td>
+                        <td>$74,712</td>
+                        <td>$53,777</td>
+                        <td>$20,935</td>
+                        <td>116</td>
+                        <td>$644</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td><strong>March</strong></td>
+                        <td>$76,589</td>
+                        <td>$55,353</td>
+                        <td>$21,236</td>
+                        <td>138</td>
+                        <td>$555</td>
+                    </tr>
+                    <tr>
+                        <td><strong>April</strong></td>
+                        <td>$75,589</td>
+                        <td>$54,353</td>
+                        <td>$21,236</td>
+                        <td>137</td>
+                        <td>$552</td>
+                    </tr>
+                    <tr>
+                        <td><strong>May</strong></td>
+                        <td>$77,589</td>
+                        <td>$56,353</td>
+                        <td>$21,236</td>
+                        <td>126</td>
+                        <td>$616</td>
+                    </tr>
+                    <tr>
+                        <td><strong>June</strong></td>
+                        <td>$71,868</td>
+                        <td>$50,981</td>
+                        <td>$20,887</td>
+                        <td>97</td>
+                        <td>$741</td>
+                    </tr>
+                    <tr>
+                        <td><strong>July</strong></td>
+                        <td>$71,707</td>
+                        <td>$51,319</td>
+                        <td>$20,388</td>
+                        <td>92</td>
+                        <td>$779</td>
+                    </tr>
+                    <tr>
+                        <td><strong>August</strong></td>
+                        <td>$71,956</td>
+                        <td>$51,419</td>
+                        <td>$20,537</td>
+                        <td>106</td>
+                        <td>$679</td>
+                    </tr>
+                    <tr>
+                        <td><strong>September</strong></td>
+                        <td>$72,331</td>
+                        <td>$51,393</td>
+                        <td>$20,938</td>
+                        <td>81</td>
+                        <td>$893</td>
+                    </tr>
+                    <tr>
+                        <td><strong>October</strong></td>
+                        <td>$72,331</td>
+                        <td>$51,393</td>
+                        <td>$20,938</td>
+                        <td>TBD</td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td><strong>Total / Average</strong></td>
+                        <td><strong>$740,839</strong></td>
+                        <td><strong>$531,573</strong></td>
+                        <td><strong>$209,266</strong></td>
+                        <td><strong>993</strong></td>
+                        <td><strong>$746 avg</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="insight-card">
+                <h4>Budget Efficiency Analysis</h4>
+                <p>Marketing investment averaged $74,084 per month with cost per unit ranging from $552 (April - best efficiency) to $893 (September). The 71.8% allocation to new vehicle marketing aligns with the 59.6% new vehicle sales mix. Peak efficiency occurred during Q1-Q2 high-volume months.</p>
+            </div>
+        </div>
+
+        <!-- Website Traffic Analysis -->
+        <div class="section light">
+            <h2>2025 Monthly Website Traffic & Key Events</h2>
+            <div class="section-subtitle">Monthly Website Performance Trends</div>
+            
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="websiteTrafficChart"></canvas>
+                </div>
+            </div>
+
+            <div class="insight-card">
+                <h4>Traffic & Engagement Patterns</h4>
+                <p>Website key events peaked in April at 240 total events, with strong performance continuing through Q1 and Q2. September showed the lowest activity at 170 events, aligning with the sales decline during that period. October rebounded to 215 events, indicating renewed engagement heading into Q4. The events-to-sales ratio provides insight into conversion funnel efficiency across different seasonal patterns.</p>
+            </div>
+        </div>
+
+        <!-- Traffic Source Analysis -->
+        <div class="section gray">
+            <h2>Traffic Source Performance</h2>
+            <div class="section-subtitle">Channel Distribution & Effectiveness</div>
+
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="trafficSourceChart"></canvas>
+                </div>
+            </div>
+
+            <h3>Monthly Traffic Source Analysis (Sessions)</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>Google Paid Search</th>
+                        <th>Facebook Paid</th>
+                        <th>Google Organic</th>
+                        <th>Direct Traffic</th>
+                        <th>LotLinx Paid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>January</strong></td>
+                        <td>7,585</td>
+                        <td>8,471</td>
+                        <td>4,955</td>
+                        <td>3,441</td>
+                        <td>2,171</td>
+                    </tr>
+                    <tr>
+                        <td><strong>February</strong></td>
+                        <td>6,089</td>
+                        <td>5,349</td>
+                        <td>5,079</td>
+                        <td>3,847</td>
+                        <td>2,243</td>
+                    </tr>
+                    <tr>
+                        <td><strong>March</strong></td>
+                        <td>7,705</td>
+                        <td>6,915</td>
+                        <td>4,882</td>
+                        <td>4,487</td>
+                        <td>2,482</td>
+                    </tr>
+                    <tr>
+                        <td><strong>April</strong></td>
+                        <td>6,620</td>
+                        <td>7,976</td>
+                        <td>4,589</td>
+                        <td>4,114</td>
+                        <td>2,375</td>
+                    </tr>
+                    <tr>
+                        <td><strong>May</strong></td>
+                        <td>6,729</td>
+                        <td>8,686</td>
+                        <td>4,608</td>
+                        <td>4,075</td>
+                        <td>3,184</td>
+                    </tr>
+                    <tr>
+                        <td><strong>June</strong></td>
+                        <td>10,167</td>
+                        <td>6,869</td>
+                        <td>3,871</td>
+                        <td>3,444</td>
+                        <td>2,069</td>
+                    </tr>
+                    <tr>
+                        <td><strong>July</strong></td>
+                        <td>9,252</td>
+                        <td>9,295</td>
+                        <td>3,957</td>
+                        <td>3,298</td>
+                        <td>2,141</td>
+                    </tr>
+                    <tr>
+                        <td><strong>August</strong></td>
+                        <td>9,298</td>
+                        <td>10,873</td>
+                        <td>3,972</td>
+                        <td>3,516</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td><strong>September</strong></td>
+                        <td>8,033</td>
+                        <td>9,413</td>
+                        <td>3,506</td>
+                        <td>2,926</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td><strong>October</strong></td>
+                        <td>12,342</td>
+                        <td>4,230</td>
+                        <td>3,093</td>
+                        <td>3,709</td>
+                        <td>N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 50px;">Overall Traffic Source Summary</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Traffic Source</th>
+                        <th>Sessions</th>
+                        <th>Users</th>
+                        <th>Page Views</th>
+                        <th>% of Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Google Paid Search</strong></td>
+                        <td>206,156</td>
+                        <td>153,710</td>
+                        <td>509,947</td>
+                        <td>29.1%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Facebook Paid Social</strong></td>
+                        <td>148,142</td>
+                        <td>105,098</td>
+                        <td>201,371</td>
+                        <td>20.9%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Organic</strong></td>
+                        <td>107,672</td>
+                        <td>65,059</td>
+                        <td>447,145</td>
+                        <td>15.2%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Direct Traffic</strong></td>
+                        <td>101,911</td>
+                        <td>62,611</td>
+                        <td>282,006</td>
+                        <td>14.4%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LotLinx Paid</strong></td>
+                        <td>32,488</td>
+                        <td>27,780</td>
+                        <td>47,184</td>
+                        <td>4.6%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email Marketing</strong></td>
+                        <td>35,358</td>
+                        <td>34,088</td>
+                        <td>42,635</td>
+                        <td>5.0%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="insight-card">
+                <h4>Traffic Source Diversification</h4>
+                <p>Google paid search consistently delivered strong performance with peaks in June (10,167 sessions) and October (12,342 sessions). Facebook paid social demonstrated consistency throughout summer months, peaking at 10,873 sessions in August. This multi-channel approach provided resilience and consistent traffic flow across varying seasonal patterns.</p>
+            </div>
+        </div>
+
+        <!-- Campaign Performance -->
+        <div class="section light">
+            <h2>Campaign Performance Insights</h2>
+            <div class="section-subtitle">2025 Performance Highlights</div>
+
+            <div class="insight-card">
+                <h4>Performance Max Campaign Excellence</h4>
+                <p>The "C - PMax - New Chevy Silverado 1500" campaign generated 11,813 conversions, establishing Performance Max as the cornerstone of lead generation strategy. This validates the investment in automated bidding and broad match targeting approaches.</p>
+            </div>
+
+            <div class="insight-card">
+                <h4>Service Campaign Efficiency</h4>
+                <p>Service-focused campaigns achieved 33% CTR for branded service campaigns, representing the highest performance across all campaign types. This demonstrates strong brand recognition and effective service marketing positioning.</p>
+            </div>
+
+            <div class="insight-card">
+                <h4>Inventory Management Insights</h4>
+                <p>New car inventory tracking from May through November reveals inventory levels ranging from 103 units (August, correlating with strong turnover) to 151 units (October-November, building for Q4). August demonstrated optimal efficiency with 103 units supporting 65 sales for 63.1% turnover. September's higher inventory of 129 units with only 52 sales resulted in the lowest turnover at 40.3%, suggesting inventory optimization opportunities.</p>
+            </div>
+
+            <div class="insight-card">
+                <h4>Seasonal Performance Patterns</h4>
+                <p>Q1 demonstrated peak performance with March leading at 138 sales and 1.05M key events. Summer months showed challenges with September reaching yearly lows (81 sales, 647K key events), indicating opportunities for enhanced warm-weather marketing strategies.</p>
+            </div>
+        </div>
+
+        <!-- Inventory & Sales Correlation -->
+        <div class="section dark">
+            <h2>Inventory & Sales Correlation</h2>
+            <div class="section-subtitle">New Car Inventory vs Sales Performance</div>
+            
+            <div class="chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="inventorySalesChart"></canvas>
+                </div>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Month</th>
+                        <th>New Car Inventory</th>
+                        <th>New Cars Sold</th>
+                        <th>Inventory Turnover</th>
+                        <th>Days Supply</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>May</strong></td>
+                        <td>122</td>
+                        <td>73</td>
+                        <td>59.8%</td>
+                        <td>50 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>June</strong></td>
+                        <td>130</td>
+                        <td>58</td>
+                        <td>44.6%</td>
+                        <td>67 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>July</strong></td>
+                        <td>109</td>
+                        <td>60</td>
+                        <td>55.0%</td>
+                        <td>55 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>August</strong></td>
+                        <td>103</td>
+                        <td>65</td>
+                        <td>63.1%</td>
+                        <td>48 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>September</strong></td>
+                        <td>129</td>
+                        <td>52</td>
+                        <td>40.3%</td>
+                        <td>74 days</td>
+                    </tr>
+                    <tr>
+                        <td><strong>October</strong></td>
+                        <td>151</td>
+                        <td>TBD</td>
+                        <td>TBD</td>
+                        <td>TBD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>November</strong></td>
+                        <td>151</td>
+                        <td>TBD</td>
+                        <td>TBD</td>
+                        <td>TBD</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="insight-card">
+                <h4>Inventory Management Analysis</h4>
+                <p>New car inventory tracking from May through November reveals inventory levels ranging from 103 units (August) to 151 units (October-November). August demonstrated the strongest turnover rate at 63.1% with 48-day supply, while September showed the weakest at 40.3% despite higher inventory levels. The data suggests optimal inventory levels between 100-130 units for efficient turnover, with the Q4 inventory increase to 151 units positioning the dealership for year-end sales opportunities.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-logo">
+                <div class="logo">C</div>
+                <div class="company-name">CAJAS DIGITAL</div>
+            </div>
+            <p style="font-size: 16px; font-weight: 700; margin-bottom: 15px;">MARKETING SOLUTIONS THAT EXCEED EXPECTATIONS</p>
+            <p>Valmark Chevrolet | 2025 Annual Performance Review</p>
+            <p>Report Period: January - October 2025 | Generated October 31, 2025</p>
+            <p style="margin-top: 15px;">Data Sources: Google Ads, Google Analytics 4, Dealership Sales Records, Marketing Budget Reports</p>
+            <p style="font-size: 12px; opacity: 0.7; margin-top: 10px;">Confidential - For Client Use Only</p>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js Configuration
+        Chart.defaults.font.family = 'Arial, Helvetica Neue, sans-serif';
+        Chart.defaults.color = '#666';
+
+        // Quarterly Performance Chart
+        const quarterlyCtx = document.getElementById('quarterlyChart').getContext('2d');
+        new Chart(quarterlyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Q1 (Jan-Mar)', 'Q2 (Apr-Jun)', 'Q3 (Jul-Sep)'],
+                datasets: [{
+                    label: 'Units Sold',
+                    data: [354, 360, 279],
+                    backgroundColor: '#FF5722',
+                    borderColor: '#FF5722',
+                    borderWidth: 2
+                }, {
+                    label: 'Monthly Average',
+                    data: [118, 120, 93],
+                    backgroundColor: '#2c3e50',
+                    borderColor: '#2c3e50',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    title: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Monthly Sales Chart
+        const monthlySalesCtx = document.getElementById('monthlySalesChart').getContext('2d');
+        new Chart(monthlySalesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+                datasets: [{
+                    label: 'New Vehicles',
+                    data: [63, 70, 74, 77, 73, 58, 60, 65, 52],
+                    backgroundColor: '#FF5722',
+                    borderColor: '#FF5722',
+                    borderWidth: 1
+                }, {
+                    label: 'Used Vehicles',
+                    data: [37, 46, 64, 60, 53, 39, 32, 41, 29],
+                    backgroundColor: '#2c3e50',
+                    borderColor: '#2c3e50',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true,
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Budget & Sales Chart
+        const budgetSalesCtx = document.getElementById('budgetSalesChart').getContext('2d');
+        new Chart(budgetSalesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                datasets: [{
+                    label: 'Marketing Budget ($)',
+                    data: [76167, 74712, 76589, 75589, 77589, 71868, 71707, 71956, 72331, 72331],
+                    backgroundColor: '#FF5722',
+                    borderColor: '#FF5722',
+                    borderWidth: 2,
+                    yAxisID: 'y'
+                }, {
+                    label: 'Units Sold',
+                    data: [100, 116, 138, 137, 126, 97, 92, 106, 81, null],
+                    backgroundColor: '#2c3e50',
+                    borderColor: '#2c3e50',
+                    borderWidth: 2,
+                    type: 'line',
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        beginAtZero: true,
+                        grid: {
+                            drawOnChartArea: false
+                        }
+                    }
+                }
+            }
+        });
+
+        // Website Traffic Chart (Key Events data - actual monthly totals)
+        const websiteTrafficCtx = document.getElementById('websiteTrafficChart').getContext('2d');
+        new Chart(websiteTrafficCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+                datasets: [{
+                    label: 'Total Key Events',
+                    data: [192, 185, 220, 240, 205, 183, 210, 200, 170, 215],
+                    backgroundColor: 'rgba(255, 87, 34, 0.1)',
+                    borderColor: '#FF5722',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Traffic Source Pie Chart
+        const trafficSourceCtx = document.getElementById('trafficSourceChart').getContext('2d');
+        new Chart(trafficSourceCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Google Paid Search (29.1%)', 'Facebook Paid (20.9%)', 'Google Organic (15.2%)', 'Direct (14.4%)', 'Email (5.0%)', 'LotLinx Paid (4.6%)', 'Other (10.8%)'],
+                datasets: [{
+                    data: [206156, 148142, 107672, 101911, 35358, 32488, 76473],
+                    backgroundColor: [
+                        '#FF5722',
+                        '#2c3e50',
+                        '#4CAF50',
+                        '#2196F3',
+                        '#FF9800',
+                        '#9C27B0',
+                        '#607D8B'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'right'
+                    }
+                }
+            }
+        });
+
+        // Inventory & Sales Correlation Chart
+        const inventorySalesCtx = document.getElementById('inventorySalesChart').getContext('2d');
+        new Chart(inventorySalesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                datasets: [{
+                    label: 'New Car Inventory',
+                    data: [122, 130, 109, 103, 129, 151, 151],
+                    backgroundColor: '#FF5722',
+                    borderColor: '#FF5722',
+                    borderWidth: 2,
+                    yAxisID: 'y'
+                }, {
+                    label: 'New Cars Sold',
+                    data: [73, 58, 60, 65, 52, null, null],
+                    backgroundColor: '#2c3e50',
+                    borderColor: '#2c3e50',
+                    borderWidth: 3,
+                    type: 'line',
+                    yAxisID: 'y'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
