@@ -1,0 +1,84 @@
+/* Fluid type scales */
+:root {
+  --h1: clamp(28px, 6vw, 52px);
+  --h2: clamp(22px, 4.5vw, 42px);
+  --h3: clamp(18px, 3.6vw, 28px);
+  --metric: clamp(22px, 6vw, 48px);
+  --body: clamp(14px, 2.8vw, 16px);
+}
+
+/* Apply fluid typography */
+body { font-size: var(--body); }
+.header h1 { font-size: var(--h1) !important; }
+.section h2, .executive-summary h2 { font-size: var(--h2) !important; }
+.section h3 { font-size: var(--h3) !important; }
+.metric-card .metric-value { font-size: var(--metric) !important; }
+
+/* Container and padded sections */
+.container { max-width: 100%; }
+.header, .section, .executive-summary, .footer {
+  padding-left: clamp(16px, 5vw, 60px) !important;
+  padding-right: clamp(16px, 5vw, 60px) !important;
+}
+.header {
+  padding-top: clamp(24px, 6vw, 60px) !important;
+  padding-bottom: clamp(24px, 6vw, 60px) !important;
+}
+.section, .executive-summary {
+  padding-top: clamp(24px, 6vw, 60px) !important;
+  padding-bottom: clamp(24px, 6vw, 60px) !important;
+}
+
+/* Responsive metrics grid */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)) !important;
+  gap: clamp(12px, 3vw, 30px) !important;
+}
+.metric-card { padding: clamp(12px, 3vw, 30px) !important; }
+
+/* Chart containers and heights */
+.chart-container { padding: clamp(12px, 3vw, 40px) !important; }
+@media (max-width: 1024px) {
+  .chart-wrapper { height: 320px !important; }
+}
+@media (max-width: 768px) {
+  .chart-wrapper { height: 260px !important; }
+}
+@media (max-width: 480px) {
+  .chart-wrapper { height: 220px !important; }
+}
+
+/* Tables: horizontal scroll on smaller screens */
+@media (max-width: 1024px) {
+  .data-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  .data-table th, .data-table td { padding: 12px 14px; }
+}
+
+/* Header/logo scaling */
+.logo {
+  width: clamp(44px, 10vw, 70px) !important;
+  height: clamp(44px, 10vw, 70px) !important;
+  font-size: clamp(18px, 5vw, 32px) !important;
+  margin-right: clamp(10px, 3vw, 20px) !important;
+}
+.company-name { font-size: clamp(16px, 4vw, 28px) !important; }
+
+/* Softer shadows on small screens for less visual weight */
+@media (max-width: 480px) {
+  .chart-container, .insight-card, .data-table {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+  }
+}
+
+/* Prevent long content from breaking layout */
+.insight-card, .section p { overflow-wrap: anywhere; }
+
+/* Slightly larger tap targets in table rows */
+.data-table tr { min-height: 44px; }
